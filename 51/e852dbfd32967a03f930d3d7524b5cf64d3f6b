@@ -1,0 +1,20 @@
+.git-ai-probe.tmp
+  s_599682f037d926::t_272da5a33685fd 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.29.1408",
+  "base_commit_sha": "51e852dbfd32967a03f930d3d7524b5cf64d3f6b",
+  "prompts": {},
+  "sessions": {
+    "s_599682f037d926": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_9a548444-0078-4bd6-999a-26367a05fca7",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 0
+    }
+  }
+}
