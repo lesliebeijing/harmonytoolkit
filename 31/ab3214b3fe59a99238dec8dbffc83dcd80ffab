@@ -1,0 +1,14 @@
+.git-ai-probe.tmp
+  h_b6170ff743a2db 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.29.1408",
+  "base_commit_sha": "31ab3214b3fe59a99238dec8dbffc83dcd80ffab",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  }
+}
