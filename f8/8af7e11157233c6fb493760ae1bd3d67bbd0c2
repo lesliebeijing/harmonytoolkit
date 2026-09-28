@@ -1,0 +1,22 @@
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/resource/ResourcesIndex.kt
+  s_599682f037d926::t_47e577f31469c9 1-355
+tools/windows/README.md
+  s_599682f037d926::t_f076cebc52c5fb 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.29.1408",
+  "base_commit_sha": "f88af7e11157233c6fb493760ae1bd3d67bbd0c2",
+  "prompts": {},
+  "sessions": {
+    "s_599682f037d926": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_9a548444-0078-4bd6-999a-26367a05fca7",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fanglin12@h-partners.com>",
+      "total_deletions": 0
+    }
+  }
+}
