@@ -1,0 +1,39 @@
+鸿蒙开发助手需求探索
+
+可以拖入 .app  .hap .hsp .har .tgz  .abc  resources.index。 每个包在顶部显示一个tab，通过文件绝对路径作为唯一标识，已拖入的再次拖入不会重新打开。
+
+app hap  hsp 是 zip 格式，解包时用通用 zip 方式解压即可
+har 是 tgz 格式，解包时用通用 .tar.gz 方式解压
+abc 是鸿蒙字节码格式，用 sdk 里面的 ark_disasm 进行反汇编显示
+resources.index 是鸿蒙资源压缩文件，之前我们已经写好了一个解析方法
+
+到时候我会把鸿蒙 sdk 下面的常用工具如 hdc restool  ark_disasm  hap-sign-tool.jar 等都拷贝到工程中使用 (区分 mac 和 windows)
+
+hap,hap,har 包等解压后里面的文件以树形列表方式显示（里面包含图片,代码文件，abc,resources.index 等），列表显示文件名字，文件大小，大小百分比。
+app 里面包括 hap,hsp 等，要支持递归展开，且最多只递归1层，即只展开 app 下面第1层的hap/hsp.
+hsp在打 release 包时会生成一个 taz 包里面包含har和hsp 2个包，这种tgz解压时也只展开第1层。
+
+列表文件双击可以显示内容
+.png .jpg 等图片直接显示
+module.json 等 json 文件显示文件内容
+pack.info 这也是 json 文件，显示文件内容
+resources.index 解析后显示内容
+modules.abc abc文件反汇编后显示内容
+sourceMaps.map 这也是 json文件，显示文件内容
+so 文件，不处理双击
+其它类型文件不确定的我们后面再定。
+
+所有文件都只显示，不可以编辑。
+
+界面设计：
+最上面是一个一个的 tab 页面
+每个tab里面我打算先上下分2栏，底部栏显示 log 日志，因为我还要对打开的包执行重打包，重签名等操作，希望能实时显示操作日志。
+上栏我打算再分左中右3栏，最左边是树形文件列表，中间栏是文件内容显示区域，右边是一个操作栏，里面显示一些基本信息和操作按钮。
+
+
+
+
+
+
+
+
