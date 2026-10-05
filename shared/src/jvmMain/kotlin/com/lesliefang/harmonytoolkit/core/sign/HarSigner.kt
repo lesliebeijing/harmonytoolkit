@@ -1,6 +1,7 @@
 package com.lesliefang.harmonytoolkit.core.sign
 
 import com.lesliefang.harmonytoolkit.core.repack.TarGzPacker
+import com.lesliefang.harmonytoolkit.core.tools.locateJarOnClasspath
 import java.io.File
 import java.lang.reflect.InvocationTargetException
 import java.net.URLClassLoader
@@ -71,16 +72,12 @@ object HarSigner {
         }
     }
 
-    /** 定位 sdk-sign-tool-full.jar：系统属性 → 运行 classpath → 仓库 tools/lib */
+    /** 定位 sdk-sign-tool-full.jar：系统属性 → 运行 classpath（兼容安装包内哈希后缀名）→ 仓库 tools/lib */
     fun locateSdkSignTool(): File {
         System.getProperty("harmonytoolkit.sdkSignTool")?.let { p ->
             File(p).takeIf { it.isFile }?.let { return it }
         }
-        // Gradle run / test 场景：jar 作为文件依赖出现在 classpath 上
-        System.getProperty("java.class.path")?.split(File.pathSeparator)?.forEach { entry ->
-            val f = File(entry)
-            if (f.isFile && f.name.equals(JAR_NAME, ignoreCase = true)) return f
-        }
+        locateJarOnClasspath(JAR_NAME)?.let { return it }
         // 开发场景：从工作目录向上找仓库的 tools/lib
         generateSequence(File(System.getProperty("user.dir"))) { it.parentFile }
             .take(6)

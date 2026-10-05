@@ -1,0 +1,57 @@
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: 打包 ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # macos-latest = Apple Silicon，只出 arm64 dmg（Windows 反汇编工具稍后补充）；
+          # 用默认构建类型 packageDmg/packageMsi，不经 ProGuard（签名工具反射调用，不混淆）
+          - os: macos-latest
+            task: packageDmg
+            files: desktopApp/build/compose/binaries/main/app/dmg/*.dmg
+          - os: windows-latest
+            task: packageMsi
+            files: desktopApp/build/compose/binaries/main/app/msi/*.msi
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: 派生版本号（v1.2.3 → 1.2.3；mac 包要求首位非 0，兜底 1.0.0）
+        id: ver
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          [[ "$v" =~ ^[1-9][0-9]*(\.[0-9]+){0,2}$ ]] || v="1.0.0"
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: 打包
+        run: ./gradlew :desktopApp:${{ matrix.task }} -PpackageVersion=${{ steps.ver.outputs.version }}
+
+      - name: 上传构建产物（workflow_dispatch 调试用）
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.os }}
+          path: ${{ matrix.files }}
+
+      - name: 附到 GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.files }}

@@ -1,5 +1,6 @@
 package com.lesliefang.harmonytoolkit.core.sign
 
+import com.lesliefang.harmonytoolkit.core.tools.locateJarOnClasspath
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -63,15 +64,12 @@ object AppSigner {
         return File(home, "bin/$bin").absolutePath
     }
 
-    /** 定位 hap-sign-tool.jar：系统属性 → 运行 classpath → 仓库 tools/lib */
+    /** 定位 hap-sign-tool.jar：系统属性 → 运行 classpath（兼容安装包内哈希后缀名）→ 仓库 tools/lib */
     fun locateHapSignTool(): File {
         System.getProperty("harmonytoolkit.hapSignTool")?.let { p ->
             File(p).takeIf { it.isFile }?.let { return it }
         }
-        System.getProperty("java.class.path")?.split(File.pathSeparator)?.forEach { entry ->
-            val f = File(entry)
-            if (f.isFile && f.name.equals(JAR_NAME, ignoreCase = true)) return f
-        }
+        locateJarOnClasspath("hap-sign-tool")?.let { return it }
         generateSequence(File(System.getProperty("user.dir"))) { it.parentFile }
             .take(6)
             .map { File(it, "tools/lib/$JAR_NAME") }

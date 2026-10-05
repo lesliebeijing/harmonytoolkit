@@ -11,11 +11,29 @@ val sdkSignToolJar = files(rootProject.projectDir.resolve("tools/lib/sdk-sign-to
 // hap/hsp/app 签名用的官方 hap-sign-tool（uber jar，运行时由 AppSigner 子进程调用）
 val hapSignToolJar = files(rootProject.projectDir.resolve("tools/lib/hap-sign-tool.jar"))
 
+// 随包分发的平台工具：构建时把当前平台的 ark_disasm 收进 jar 资源，
+// 运行时 ToolLocator 文件系统找不到就从 classpath 解出（构建机平台与产物平台一致）
+val bundledOsDir = if (System.getProperty("os.name").lowercase().contains("mac")) "mac" else "windows"
+
+val copyBundledTools = tasks.register<Copy>("copyBundledTools") {
+    into(layout.buildDirectory.dir("generated/bundledTools"))
+    from(rootProject.projectDir.resolve("tools/$bundledOsDir")) {
+        include("ark_disasm*")
+        into(bundledOsDir)
+    }
+}
+
+// 资源目录从任务输出推导，processResources 自动依赖 copyBundledTools
+val bundledToolsOutput = copyBundledTools.map { it.destinationDir }
+
 kotlin {
     jvm()
 
 
     sourceSets {
+        jvmMain {
+            resources.srcDir(bundledToolsOutput)
+        }
         jvmMain.dependencies {
             implementation(libs.kotlinx.coroutinesCore)
             implementation(libs.commons.compress)

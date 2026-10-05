@@ -18,8 +18,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
-/** 与 desktopApp/build.gradle.kts 的 packageVersion 保持一致 */
-private const val APP_VERSION = "1.0.0"
+/** 打包版从资源读取（构建时由 -PpackageVersion 注入）；开发环境兜底 1.0.0 */
+private val APP_VERSION: String by lazy {
+    runCatching {
+        Thread.currentThread().contextClassLoader
+            ?.getResourceAsStream("app-version.txt")
+            ?.bufferedReader()
+            ?.readText()
+            ?.trim()
+            .orEmpty()
+    }.getOrNull().orEmpty().ifEmpty { "1.0.0" }
+}
 
 /** 关于弹窗：应用名、版本与功能概览 */
 @Composable
