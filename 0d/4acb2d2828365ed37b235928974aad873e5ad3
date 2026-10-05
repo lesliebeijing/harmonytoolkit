@@ -1,0 +1,56 @@
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/AboutDialog.kt
+  s_b80aa0ffbf9910::t_262df690e96cb5 24-25
+  s_b80aa0ffbf9910::t_51aa7b8e7c1380 21-23,26-31
+shared/build.gradle.kts
+  s_b80aa0ffbf9910::t_6408555998542f 14-18,20-25,34,36
+  s_b80aa0ffbf9910::t_d5ebf4cbaaf466 19,26-28,35
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/AppSigner.kt
+  s_b80aa0ffbf9910::t_1d993e9bc7f3b1 3
+  s_b80aa0ffbf9910::t_4cd3eef2c5bf13 67,72
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/HarSigner.kt
+  s_b80aa0ffbf9910::t_bf58c0f8c3c250 4
+  s_b80aa0ffbf9910::t_63fc2887a63190 75,80
+.github/workflows/release.yml
+  s_b80aa0ffbf9910::t_79e2fb7a2556d4 1-14,17,20,23-36,38-40,42-57
+  s_b80aa0ffbf9910::t_ffbadd335c82fa 15-16,18-19,21-22
+  s_b80aa0ffbf9910::t_8c6074aee63977 37,41
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/tools/ToolLocatorTest.kt
+  s_b80aa0ffbf9910::t_85b148824040bc 1-30
+shared/src/jvmTest/resources/mac/fake-disasm
+  s_b80aa0ffbf9910::t_8262322c544595 1-2
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/tools/ToolLocator.kt
+  s_b80aa0ffbf9910::t_96bec9b1e3c2c5 5-22,94
+  s_b80aa0ffbf9910::t_ea6da6d6935a34 31,36-37,39-43,45-46,61-68,71,74-93
+shared/src/jvmTest/resources/windows/fake-disasm.exe
+  s_b80aa0ffbf9910::t_8262322c544595 1
+desktopApp/build.gradle.kts
+  s_b80aa0ffbf9910::t_cd1cc5365d4970 28,33
+  s_b80aa0ffbf9910::t_4a230685b085b2 25-26,29
+  s_b80aa0ffbf9910::t_43db0828eaa26e 9-11,27,30-32,34-42,50,53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.29.1408",
+  "base_commit_sha": "0d4acb2d2828365ed37b235928974aad873e5ad3",
+  "prompts": {},
+  "sessions": {
+    "s_b80aa0ffbf9910": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_92964522-1f86-47d5-b7c2-550528ec5163",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 51
+    },
+    "s_b86608e3add48d": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_0e7ef5df-215f-4178-9c3f-9303bb9672de",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 528
+    }
+  }
+}
