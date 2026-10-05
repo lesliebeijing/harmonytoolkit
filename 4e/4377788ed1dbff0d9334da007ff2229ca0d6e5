@@ -1,0 +1,252 @@
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/main.kt
+  s_b86608e3add48d::t_c666a6b856d164 42
+  s_b86608e3add48d::t_7577f9e79ffd1f 40
+  s_b86608e3add48d::t_fafb9f5ea7b100 141,143
+  s_b86608e3add48d::t_af5573a9e33efc 142
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/PasswordToolDialog.kt
+  s_b86608e3add48d::t_c05a3859a07c11 1-212
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/LogPanel.kt
+  s_b86608e3add48d::t_df6c1e8383fd49 78-82
+  s_b86608e3add48d::t_8673ea5f6621cd 4,10
+  s_b86608e3add48d::t_9b4a41034c0e12 36
+  s_b86608e3add48d::t_746ab80e48dd5c 49,51,61-76
+  s_b86608e3add48d::t_da7a29a0628fde 44
+  s_b86608e3add48d::t_300a85f2cecaa9 89-121
+  s_b86608e3add48d::t_0743c9ff2880cc 133-134
+  s_b86608e3add48d::t_edd7ff5c0a8a3d 16
+  s_b86608e3add48d::t_549f280898539a 122-124
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/model/PackInfo.kt
+  s_b86608e3add48d::t_1a2b8082bf7e81 4-5,16-17,26-27,29-32,38
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/viewers/ViewerPane.kt
+  s_b86608e3add48d::t_defd729036a263 21-23
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/repack/TarGzPacker.kt
+  s_b80aa0ffbf9910::t_edbe400f1fae8b 1-11,17-24,26-41
+  s_b80aa0ffbf9910::t_51a2eee95c7c6c 12-16,25
+shared/build.gradle.kts
+  s_b86608e3add48d::t_4e0683904250a3 43
+  s_fb08f75ea1efff::t_70d946a522e86c 23
+  s_b86608e3add48d::t_e59eea32ccc45e 11-13
+  s_b86608e3add48d::t_9ad7f066789f4b 25
+  s_fb08f75ea1efff::t_0f976572d8a3d7 42
+  s_fb08f75ea1efff::t_0acc964cb2d09b 8-10
+  s_fb08f75ea1efff::t_fb79ebd9c0fdda 5
+  s_fb08f75ea1efff::t_85694c9d46375d 24
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/viewers/TextViewer.kt
+  s_b86608e3add48d::t_2dd10dd04a183b 15,18
+  s_b86608e3add48d::t_3a7dfdac6e7da5 51
+  s_b86608e3add48d::t_7f73d141e5e676 263-264
+  s_b86608e3add48d::t_6cebc7b7fbb2c5 234-248,250-251
+  s_b86608e3add48d::t_f1c7fb0b6eb273 219-220,222-228
+  s_b86608e3add48d::t_1b92f6dc29a1be 163-164
+  s_b86608e3add48d::t_84de2b9280c389 92,95-96,106-111,116-117,124
+  s_b86608e3add48d::t_c88cedfa22b54f 131-145,147-148
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/SearchBar.kt
+  s_b86608e3add48d::t_13ccc9e5e2602b 41-43
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/AboutDialog.kt
+  s_b80aa0ffbf9910::t_a62f5b5ff33193 51
+  s_b86608e3add48d::t_caf42b35b9e197 19
+  s_b86608e3add48d::t_81d8fcfab71ee3 1-18,20-35,39-40,42-44,57-62
+  s_b86608e3add48d::t_a9e3ba868741c0 36-38,41,45-50,52-56
+gradle/libs.versions.toml
+  s_fb08f75ea1efff::t_e5736b73ba66a5 18
+  s_fb08f75ea1efff::t_9a3f04aad7ec1c 36
+  s_fb08f75ea1efff::t_73a7b531cfdf6e 3
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/log/SessionLog.kt
+  s_b86608e3add48d::t_ec069f8ddeaf65 15
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/signature/HapSignatureParserTest.kt
+  s_fb08f75ea1efff::t_7ca9bad8a33b14 78,82,126
+  s_fb08f75ea1efff::t_d8d5c702a4a5c1 90
+  s_fb08f75ea1efff::t_a0c0e65aa0ebe0 137-138,145,151,154
+  s_fb08f75ea1efff::t_db6c712809fb12 1-6,8-39,41-44,46-77,79-81,83-89,91-125,127-136,139-144,146-150,152-153,155-234
+  s_fb08f75ea1efff::t_a889f2f39c9099 40,45
+  s_fb08f75ea1efff::t_8cd2591aa26a0d 7
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/SigningMaterials.kt
+  s_fb08f75ea1efff::t_d318dde1469819 1-85
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/sign/HarSignerTest.kt
+  s_fb08f75ea1efff::t_26ec5c964a2a21 100,103-106
+  s_fb08f75ea1efff::t_57160e889ad88b 87,94
+  s_fb08f75ea1efff::t_3807a5dd79955a 135
+  s_fb08f75ea1efff::t_c268a7d759fab3 1-86,88-93,95-99,101-102,107-134,136-200
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/AppSigner.kt
+  s_b86608e3add48d::t_b52d793c2b8879 1-51,53,58-82
+  s_b86608e3add48d::t_6ae002bcfe13f7 52,54-57
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/viewers/AbcViewer.kt
+  s_b86608e3add48d::t_30c1360a5af3b4 23,29,31-34,36-37
+  s_b86608e3add48d::t_d6daf4dde9a958 20
+  s_b86608e3add48d::t_d3dc07a76517d9 24,26-27,30,35
+  s_b86608e3add48d::t_1b2b4d2c9ddae6 68-70
+  s_b86608e3add48d::t_ae3549f5915138 18
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/sign/SigningMaterialsTest.kt
+  s_fb08f75ea1efff::t_ce07b1491280b0 1-51,54-103
+  s_fb08f75ea1efff::t_71c7e0643058ec 52-53
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/password/HarmonyPasswordToolTest.kt
+  s_b86608e3add48d::t_8c001fa7451db1 4,8,12,19,29,31,55-56,58-59,70,73,75,77
+  s_b86608e3add48d::t_9f38ee2bea2333 5,20,24-25,30,46
+  s_b86608e3add48d::t_5815586aa378ce 1-3,6-7,9-11,13-18,26,39-41,48-51,66-68,71,76,91-105,133-135
+  s_b86608e3add48d::t_1e703e99d704e7 21-23,27-28,32-38,42-45,47,52-54,57,60-65,69,72,74,78-90,106-132
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/MaterialInspector.kt
+  s_fb08f75ea1efff::t_781402c194c55e 1-73
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/InfoPanel.kt
+  s_fb08f75ea1efff::t_89f975d485d4ac 231-233,284
+  s_fb08f75ea1efff::t_e779cd29846b63 98-107
+  s_fb08f75ea1efff::t_c62362a3054748 283
+  s_b80aa0ffbf9910::t_97ac309137f502 24
+  s_b80aa0ffbf9910::t_e2066fe2134822 210-220
+  s_fb08f75ea1efff::t_d0949989a5f42a 5,25-29,32-33,46-48
+  s_b80aa0ffbf9910::t_8d0ca62b5c7e74 134-159
+  s_b80aa0ffbf9910::t_29c94137e4cdeb 245-259
+  s_b80aa0ffbf9910::t_255a2b11f31e13 66-81
+  s_fb08f75ea1efff::t_0207a7c8052440 310,323-324,328,331-354
+  s_b86608e3add48d::t_cb6f3f3ae9bbbb 188-201,204-208
+  s_b80aa0ffbf9910::t_15cb5630a3352a 171-174
+  s_b80aa0ffbf9910::t_3813d150568f71 282
+  s_fb08f75ea1efff::t_dd4cee06d5cead 109
+  s_fb08f75ea1efff::t_5a74f4d7e1ef3d 65
+  s_b86608e3add48d::t_bbae52c3061963 183-187
+  s_b80aa0ffbf9910::t_d7887c06528b3c 260-263
+  s_b80aa0ffbf9910::t_43039a7926dc2c 175-182
+  s_b80aa0ffbf9910::t_3f196480f311f1 39,41
+  s_fb08f75ea1efff::t_089b96d1935ca9 303-309,325-327
+  s_fb08f75ea1efff::t_b38c87a1d8a7b1 40,42,44-45,49,51-53,55-58,62-63,82,116-128,130-131,160,202-203,209,234-244,264-281,356,370-372
+  s_fb08f75ea1efff::t_5648db271df42e 355,357-369
+  s_fb08f75ea1efff::t_1bda6eaa5a7f92 50
+  s_b80aa0ffbf9910::t_535927d4b66bad 60,64
+  s_b80aa0ffbf9910::t_366815abfd1b7f 161-163,165-170
+  s_b80aa0ffbf9910::t_66151100a7da0e 132-133
+  s_b80aa0ffbf9910::t_11d69ad7562173 43
+  h_b6170ff743a2db 164
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/viewers/ResourcesIndexViewer.kt
+  s_b86608e3add48d::t_39d0819cb75451 15
+  s_b86608e3add48d::t_58239cdcfec30f 34
+  s_b86608e3add48d::t_d842790c59fb53 45-46,75,80
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/extract/PackageOpener.kt
+  s_b86608e3add48d::t_fcebfdec778399 59
+  s_b86608e3add48d::t_ddec2b5f50b68a 80-83
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/FileTreeView.kt
+  s_b80aa0ffbf9910::t_0e1ee072b8e4bb 120-122
+  s_b86608e3add48d::t_c440dcc958a0b9 65
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/SignMaterialsDialog.kt
+  s_b86608e3add48d::t_b1e260db9d5863 243-244
+  s_b86608e3add48d::t_1de6eadd74d70c 37
+  s_b86608e3add48d::t_bc2efa70c4310f 259-268
+  s_b86608e3add48d::t_1fe20d15edd0ad 297-299
+  s_b80aa0ffbf9910::t_3a00843ea6b047 301-302
+  s_fb08f75ea1efff::t_1fb2d43d42b0d4 350,362
+  s_fb08f75ea1efff::t_91fdc837b27f74 256-257,275
+  s_fb08f75ea1efff::t_81ad42ffccec8e 160
+  s_b86608e3add48d::t_de5a81ac7c289e 202-218,220
+  s_fb08f75ea1efff::t_66e3a34f330c1e 1-3,5-36,38-130,132-159,161-183,199-201,225-242,245-255,258,269-274,276-296,300,303-349,351-361,363-406
+  s_b86608e3add48d::t_3a91b75eeba325 4
+  s_fb08f75ea1efff::t_5a3cfbaf382de6 131
+  s_fb08f75ea1efff::t_c1631912c15a37 184-198
+  s_b86608e3add48d::t_0495fa79cb7d49 219,221-224
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/repack/Repackager.kt
+  s_b80aa0ffbf9910::t_984d9850751963 1-5,9-12,14,18-19,26-29,31-32,45-46,65-66,82
+  s_b80aa0ffbf9910::t_83622ae53f61a3 15-17,21,41-44,47,79-81
+  s_b80aa0ffbf9910::t_713daa8f2abb7b 30
+  s_b80aa0ffbf9910::t_390ceb03ccb3b2 6-8,13,20,22-25,33-40,48-64,67-78
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/signature/HapSignatureParser.kt
+  s_fb08f75ea1efff::t_14dbe08b05c209 1-5,7-9,11-12,14-15,20-36,56-122,124-125,127-128,130-151,154-155,163-168,171-222,227,229-250,254-287,289-293,295-296,298-299,301-313
+  s_fb08f75ea1efff::t_a59eab37e87998 6,16
+  s_fb08f75ea1efff::t_b668214ada5d5c 153,169-170
+  s_fb08f75ea1efff::t_b3ae324e940cf1 152
+  s_fb08f75ea1efff::t_3d23bd919ee668 123
+  s_fb08f75ea1efff::t_37b68cc2f98d83 251-253
+  s_fb08f75ea1efff::t_5dfd1c5ba26128 126,129
+  s_fb08f75ea1efff::t_83bb44c5f1b7c0 294,297,300
+  s_fb08f75ea1efff::t_6da47c686b1631 13,19
+  s_fb08f75ea1efff::t_cfbcecc109c8f3 228
+  s_fb08f75ea1efff::t_f5b276d1c9d0f7 18
+  s_fb08f75ea1efff::t_e028979b28d882 288
+  s_fb08f75ea1efff::t_8fbe521474b0a2 10,17
+  s_fb08f75ea1efff::t_5c4f6482636301 156-160
+  s_fb08f75ea1efff::t_409c6b35f56444 37-55
+  s_fb08f75ea1efff::t_9e4aa901a49cd6 223-226
+  s_fb08f75ea1efff::t_b586bc68c78de1 161-162
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/sign/AppSignerTest.kt
+  s_b86608e3add48d::t_1d082d7e226876 1-4,8-28,30-33,35-39,43-50,57-68,70-74,76-81,83-109,111-112,115-123,155-156,176-177,191,212,231-233
+  s_b86608e3add48d::t_5df16042891e1a 157-160,165,167,174-175
+  s_b86608e3add48d::t_c39e538e853ed7 5-7,29,34,40-42,51-56,69,75,82,110,113-114,124-154,161-164,166,168-173,178-190,192-211,213-228,230
+  s_b86608e3add48d::t_ece94fd790c835 229
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/FileDialogs.kt
+  s_b80aa0ffbf9910::t_e9c8695c23f643 1-34
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/repack/ZipPacker.kt
+  s_b80aa0ffbf9910::t_e0fdc83432009e 1-35,37-78
+  s_b80aa0ffbf9910::t_1670603bedcdfb 36
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/sign/HarSigner.kt
+  s_b80aa0ffbf9910::t_b3f42b94e1308a 3
+  s_fb08f75ea1efff::t_1ea42bab4bfcb6 1-2,4-116
+shared/src/jvmMain/kotlin/com/lesliefang/harmonytoolkit/core/password/HarmonyPasswordTool.kt
+  s_b86608e3add48d::t_670090b2125ca8 1-3,21-22,26,31-33,41-42,92,158,240,253,256
+  s_b86608e3add48d::t_1aeccc433b2cd8 150-153,159-160
+  s_b86608e3add48d::t_12ae7d6a74c87f 195,197
+  s_b86608e3add48d::t_ae3d0072c60347 5,47-49
+  s_b86608e3add48d::t_765c4f8041e77e 4,6-20,23-25,27-30,34-40,43-46,50-91,93-149,154-157,161-194,196,198-239,241-252,254-255
+shared/src/jvmTest/kotlin/com/lesliefang/harmonytoolkit/core/repack/RepackagerTest.kt
+  s_b80aa0ffbf9910::t_f41628fea3740d 171-199
+  s_b80aa0ffbf9910::t_36a460fd346e89 1-6,10-11,13-17,21-53,136-138,141-145,148,150-154,156-170,200-203
+  s_b80aa0ffbf9910::t_011a366350529c 155
+  s_b80aa0ffbf9910::t_92d4579b1e293d 139-140,146-147,149
+  s_b80aa0ffbf9910::t_c913098fcaa364 7-9,12,18-20
+  s_b80aa0ffbf9910::t_d6ab4e9699cc5d 54-78
+  s_b80aa0ffbf9910::t_8eeab425f2d016 79-135
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/AppState.kt
+  s_b86608e3add48d::t_fe8bcb92323fa6 119,121-122
+  s_b86608e3add48d::t_4e8063294e7cfe 120
+  s_b86608e3add48d::t_cfa1081a9372ef 47-49
+  s_b86608e3add48d::t_73e125144780e2 59
+  s_b86608e3add48d::t_6dc835749f63d4 50-58,60
+  s_b86608e3add48d::t_5fbc02f42e2175 3-4
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/TabBar.kt
+  s_b86608e3add48d::t_0447f604d66c7c 110
+  s_b86608e3add48d::t_2b78fb97cda0bd 25,56-57,60-62,64-65,67,101,104-109,111-129
+  s_b86608e3add48d::t_02d6212cb26149 58-59,63,66,68-100
+  s_b86608e3add48d::t_5a0902ce29d4cd 32,49-55
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/PackageTabContent.kt
+  s_b86608e3add48d::t_9fcd3e1abd753f 9
+  s_b86608e3add48d::t_4d70e6ea2c4d0d 80,99,105-124,126
+  s_b86608e3add48d::t_801c3dc8b9ee31 15,17-18,20
+  s_b86608e3add48d::t_8619b8606946f7 16,19
+  s_b80aa0ffbf9910::t_bc08ba471fcbb4 127
+  s_b86608e3add48d::t_e126bf82f431ad 78-79,81,85-98,100-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.29.1408",
+  "base_commit_sha": "4e4377788ed1dbff0d9334da007ff2229ca0d6e5",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  },
+  "sessions": {
+    "s_b80aa0ffbf9910": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_92964522-1f86-47d5-b7c2-550528ec5163",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 114
+    },
+    "s_b86608e3add48d": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_0e7ef5df-215f-4178-9c3f-9303bb9672de",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 528
+    },
+    "s_fb08f75ea1efff": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_b92e50eb-4981-459c-ba3f-54f336965bf3",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_deletions": 98
+    }
+  }
+}
