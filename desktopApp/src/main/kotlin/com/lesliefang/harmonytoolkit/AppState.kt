@@ -1,5 +1,7 @@
 package com.lesliefang.harmonytoolkit
 
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -41,6 +43,20 @@ class TabState(
 ) {
     /** 内容区搜索（Cmd+F 唤起，文本/abc/resources.index 查看器响应） */
     val search = SearchState()
+
+    /** abc 反汇编结果会话缓存（file → 结果），viewer 重建或切 tab 回来不重复执行 */
+    val abcCache = HashMap<File, Result<com.lesliefang.harmonytoolkit.core.tools.DisasmResult>>()
+
+    /** 内容区滚动状态池：viewer/树销毁重建（切 tab 回来）后滚动位置不丢 */
+    private val lazyListStates = HashMap<String, LazyListState>()
+    private val scrollStates = HashMap<String, ScrollState>()
+
+    /** 文件树滚动（每 tab 一个） */
+    val treeListState = LazyListState()
+
+    fun listStateOf(key: String): LazyListState = lazyListStates.getOrPut(key) { LazyListState() }
+
+    fun scrollStateOf(key: String): ScrollState = scrollStates.getOrPut(key) { ScrollState(0) }
 
     var loadState by mutableStateOf<TabLoadState>(TabLoadState.Loading)
         private set
@@ -99,6 +115,10 @@ class AppState(private val scope: CoroutineScope) {
     var activeTabId by mutableStateOf<String?>(null)
 
     val activeTab: TabState? get() = tabs.firstOrNull { it.id == activeTabId }
+
+    /** 全局工具弹窗开关（TabBar 右侧入口，与已打开的包无关） */
+    var showPasswordTool by mutableStateOf(false)
+    var showAbout by mutableStateOf(false)
 
     fun openFiles(files: List<File>) {
         files.forEach { openFile(it) }

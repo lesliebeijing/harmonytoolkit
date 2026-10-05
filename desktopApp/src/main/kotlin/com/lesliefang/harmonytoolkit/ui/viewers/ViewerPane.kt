@@ -18,9 +18,9 @@ fun ViewerPane(tab: TabState) {
     when (val request = tab.viewer) {
         null -> EmptyViewer()
         is ViewerRequest.Image -> ImageViewer(request.file)
-        is ViewerRequest.Text -> TextViewer(request.file, request.prettyJson, tab.search)
-        is ViewerRequest.ResourcesIndex -> ResourcesIndexViewer(request.file, tab.search)
-        is ViewerRequest.Abc -> AbcViewer(request.file, tab.log, tab.search)
+        is ViewerRequest.Text -> TextViewer(request.file, request.prettyJson, tab)
+        is ViewerRequest.ResourcesIndex -> ResourcesIndexViewer(request.file, tab)
+        is ViewerRequest.Abc -> AbcViewer(request.file, tab)
         is ViewerRequest.Placeholder -> PlaceholderViewer(request)
     }
 }

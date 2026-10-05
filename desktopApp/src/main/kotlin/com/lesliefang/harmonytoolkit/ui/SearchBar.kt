@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.sp
 class SearchState {
     var visible by mutableStateOf(false)
     var query by mutableStateOf("")
+
+    /** 当前匹配序号（文本/abc 查看器共用）：存这里跨 viewer 重建保留，切 tab 回来不重置 */
+    var currentMatch by mutableStateOf(0)
 }
 
 /**

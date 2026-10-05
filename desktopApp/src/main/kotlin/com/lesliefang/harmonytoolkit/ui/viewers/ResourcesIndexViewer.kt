@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lesliefang.harmonytoolkit.TabState
 import com.lesliefang.harmonytoolkit.core.resource.ResourcesIndex
 import com.lesliefang.harmonytoolkit.core.resource.ResourcesIndexParser
 import com.lesliefang.harmonytoolkit.ui.SearchBar
@@ -41,7 +42,8 @@ import java.io.File
 
 /** resources.index 查看器：顶部统计 + 资源列表（类型/名称/id + 各限定词目录下的值）；搜索为资源名/值过滤 */
 @Composable
-fun ResourcesIndexViewer(file: File, search: SearchState? = null) {
+fun ResourcesIndexViewer(file: File, tab: TabState) {
+    val search = tab.search
     val parsed by produceState<Result<ResourcesIndex>?>(null, file) {
         value = withContext(Dispatchers.IO) {
             runCatching { ResourcesIndexParser.parse(file.readBytes()) }
@@ -70,13 +72,12 @@ fun ResourcesIndexViewer(file: File, search: SearchState? = null) {
             }
         }
 
-        else -> ResourceList(result.getOrThrow(), search)
+        else -> ResourceList(result.getOrThrow(), search, tab.listStateOf("res:${file.path}"))
     }
 }
 
 @Composable
-private fun ResourceList(index: ResourcesIndex, search: SearchState?) {
-    val listState = rememberLazyListState()
+private fun ResourceList(index: ResourcesIndex, search: SearchState?, listState: LazyListState) {
     // 搜索条关闭（Esc）后取消过滤，但保留搜索词，重开时输入框还在
     val query = if (search?.visible == true) search.query else ""
     val filtered = remember(index, query) {

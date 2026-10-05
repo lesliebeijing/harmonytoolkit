@@ -6,11 +6,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -68,31 +75,58 @@ fun PackageTabContent(tab: TabState) {
 
 @Composable
 private fun ThreePaneLayout(tab: TabState, pkg: com.lesliefang.harmonytoolkit.core.extract.OpenedPackage) {
-    // 初始比例：内容区最大化——树 ~20% 宽，右栏 ~22% 宽，底部日志 ~14% 高
-    val mainSplit = rememberSplitPaneState(initialPositionPercentage = 0.86f)
+    // 日志默认收起成状态条，展开后回到可拖拽的分栏布局。
+    // movableContent 让内容区（含 viewer 的反汇编结果等状态）在两种容器结构间移动而不销毁。
+    var logExpanded by remember { mutableStateOf(false) }
+    val mainSplit = rememberSplitPaneState(initialPositionPercentage = 0.70f)
     val treeSplit = rememberSplitPaneState(initialPositionPercentage = 0.20f)
     val infoSplit = rememberSplitPaneState(initialPositionPercentage = 0.78f)
 
-    VerticalSplitPane(splitPaneState = mainSplit) {
-        first(200.dp) {
-            HorizontalSplitPane(splitPaneState = treeSplit) {
-                first(180.dp) {
-                    FileTreeView(tab, pkg)
-                }
-                second(240.dp) {
-                    HorizontalSplitPane(splitPaneState = infoSplit) {
-                        first(280.dp) {
-                            ViewerPane(tab)
-                        }
-                        second(220.dp) {
-                            InfoPanel(pkg)
-                        }
-                    }
-                }
+    val currentTab by rememberUpdatedState(tab)
+    val currentPkg by rememberUpdatedState(pkg)
+    val panes = remember {
+        movableContentOf { ThreePanes(currentTab, currentPkg, treeSplit, infoSplit) }
+    }
+
+    if (logExpanded) {
+        VerticalSplitPane(splitPaneState = mainSplit) {
+            first(200.dp) {
+                panes()
+            }
+            second(120.dp) {
+                LogPanel(Modifier.fillMaxSize(), tab, onCollapse = { logExpanded = false })
             }
         }
-        second(120.dp) {
-            LogPanel(tab)
+    } else {
+        Column(Modifier.fillMaxSize()) {
+            Box(Modifier.weight(1f)) {
+                panes()
+            }
+            LogStatusBar(tab, onClick = { logExpanded = true })
+        }
+    }
+}
+
+@Composable
+private fun ThreePanes(
+    tab: TabState,
+    pkg: com.lesliefang.harmonytoolkit.core.extract.OpenedPackage,
+    treeSplit: org.jetbrains.compose.splitpane.SplitPaneState,
+    infoSplit: org.jetbrains.compose.splitpane.SplitPaneState,
+) {
+    HorizontalSplitPane(splitPaneState = treeSplit) {
+        first(180.dp) {
+            FileTreeView(tab, pkg)
+        }
+        second(240.dp) {
+            HorizontalSplitPane(splitPaneState = infoSplit) {
+                first(280.dp) {
+                    ViewerPane(tab)
+                }
+                second(220.dp) {
+                    InfoPanel(pkg, tab.log)
+                }
+            }
         }
     }
 }

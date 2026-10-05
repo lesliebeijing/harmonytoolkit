@@ -37,7 +37,9 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.lesliefang.harmonytoolkit.core.model.PackageKind
+import com.lesliefang.harmonytoolkit.ui.AboutDialog
 import com.lesliefang.harmonytoolkit.ui.PackageTabContent
+import com.lesliefang.harmonytoolkit.ui.PasswordToolDialog
 import com.lesliefang.harmonytoolkit.ui.TabBar
 import com.lesliefang.harmonytoolkit.ui.WelcomeScreen
 import kotlinx.coroutines.delay
@@ -136,6 +138,9 @@ fun HarmonyToolkitApp(state: AppState) {
                         )
                     }
                 }
+
+                if (state.showPasswordTool) PasswordToolDialog(onDismiss = { state.showPasswordTool = false })
+                if (state.showAbout) AboutDialog(onDismiss = { state.showAbout = false })
             }
         }
     }

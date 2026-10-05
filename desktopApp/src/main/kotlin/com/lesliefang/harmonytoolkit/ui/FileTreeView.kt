@@ -62,7 +62,7 @@ fun FileTreeView(tab: TabState, pkg: OpenedPackage) {
     val root = pkg.root ?: return
     val rows = remember(root, tab.expandedPaths) { flatten(root, tab.expandedPaths) }
     val totalSize = pkg.totalSize
-    val listState = rememberLazyListState()
+    val listState = tab.treeListState
 
     Surface(tonalElevation = 1.dp, modifier = Modifier.fillMaxSize()) {
         Row(Modifier.fillMaxSize()) {
@@ -117,7 +117,9 @@ private fun TreeRow(row: FlatRow, tab: TabState, totalSize: Long) {
                 if (selected) MaterialTheme.colorScheme.primaryContainer
                 else MaterialTheme.colorScheme.surface
             )
-            .pointerInput(node.path) {
+            // key 必须带 tab：两个包的树常有相同路径（如同一 har 的签名前后版本），
+            // 仅按 node.path 复用手势协程时，点击会继续操作切走前的旧 tab 状态
+            .pointerInput(tab, node.path) {
                 if (node.isContainer) {
                     // 目录/嵌套包：单击立即选中并展开收起（不设双击回调，避免单击延迟）
                     detectTapGestures(
@@ -156,17 +158,6 @@ private fun TreeRow(row: FlatRow, tab: TabState, totalSize: Long) {
             fontWeight = if (node.isContainer) FontWeight.SemiBold else FontWeight.Normal,
             modifier = Modifier.weight(1f).padding(end = 8.dp),
         )
-        node.nestedKind?.let {
-            Text(
-                it.label,
-                fontSize = 9.sp,
-                fontFamily = FontFamily.Monospace,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .padding(horizontal = 3.dp, vertical = 1.dp),
-            )
-        }
         Text(
             formatSize(node.size),
             fontSize = 12.sp,

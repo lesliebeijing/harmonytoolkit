@@ -40,7 +40,6 @@ class PackageOpener(private val cacheRoot: File) {
             ?: throw UnsupportedFileException(canonical)
 
         if (kind.isSingleFile) {
-            log.info("打开单文件 ${canonical.name} (${kind.description})")
             return@withContext OpenedPackage(canonical, kind, null, canonical.length(), canonical.parentFile)
         }
 
@@ -57,7 +56,7 @@ class PackageOpener(private val cacheRoot: File) {
             log.info("开始解包 ${canonical.name}（${kind.description}）")
             workDir.deleteRecursively()
             contentDir.mkdirs()
-            val count = unpackByKind(canonical, kind, contentDir, log)
+            val count = unpackByKind(canonical, kind, contentDir)
             doneMarker.writeText("ok")
             log.info("解出 $count 个条目，耗时 ${System.currentTimeMillis() - start} ms")
         }
@@ -71,39 +70,17 @@ class PackageOpener(private val cacheRoot: File) {
             .firstOrNull { it.name.equals("pack.info", ignoreCase = true) }
             ?.sourceFile
             ?.let { PackInfoParser.parse(it.readText()) }
-        if (packInfo != null) {
-            log.info("pack.info: ${packInfo.bundleName} v${packInfo.versionName}(${packInfo.versionCode}) [${packInfo.bundleType}]")
-        }
         OpenedPackage(canonical, kind, root, canonical.length(), workDir, packInfo)
     }
 
-    /** log 非空时按时间间隔打解包进度，避免大包长时间无反馈看起来像卡住 */
     private fun unpackByKind(
         file: File,
         kind: PackageKind,
         targetDir: File,
-        log: SessionLog? = null,
-    ): Int {
-        val onEntry: (String) -> Unit
-        if (log == null) {
-            onEntry = {}
-        } else {
-            var count = 0
-            var lastReport = System.currentTimeMillis()
-            onEntry = {
-                count++
-                val now = System.currentTimeMillis()
-                if (now - lastReport >= 1000) {
-                    lastReport = now
-                    log.info("解包中… 已解出 $count 个条目")
-                }
-            }
-        }
-        return when {
-            kind.isZip -> Unpacker.unzip(file, targetDir, onEntry)
-            kind.isTgz -> Unpacker.untargz(file, targetDir, onEntry)
-            else -> error("unreachable: $kind")
-        }
+    ): Int = when {
+        kind.isZip -> Unpacker.unzip(file, targetDir) {}
+        kind.isTgz -> Unpacker.untargz(file, targetDir) {}
+        else -> error("unreachable: $kind")
     }
 
     /**

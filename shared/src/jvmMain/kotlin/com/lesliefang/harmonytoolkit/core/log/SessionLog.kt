@@ -12,7 +12,7 @@ data class LogLine(val time: LocalTime, val level: LogLevel, val message: String
     val timeText: String = time.format(TIME_FORMAT)
 
     companion object {
-        private val TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+        private val TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss")
     }
 }
 

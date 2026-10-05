@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
@@ -46,6 +48,7 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lesliefang.harmonytoolkit.TabState
 import com.lesliefang.harmonytoolkit.ui.SearchBar
 import com.lesliefang.harmonytoolkit.ui.SearchState
 import kotlinx.coroutines.Dispatchers
@@ -86,10 +89,11 @@ internal fun findLineMatches(lines: List<String>, query: String): List<TextMatch
 /**
  * 文本/JSON 查看器。超限截断到 8MB。
  * 小文件整块只读 TextField（Cmd+A/Cmd+C）；大文件逐行虚拟滚动。
- * 两档均支持搜索（search.visible 时显示搜索条）。
+ * 两档均支持搜索（search.visible 时显示搜索条），滚动位置存于 tab 会话不随切换丢失。
  */
 @Composable
-fun TextViewer(file: File, prettyJson: Boolean, search: SearchState? = null) {
+fun TextViewer(file: File, prettyJson: Boolean, tab: TabState) {
+    val search = tab.search
     val content by produceState<TextContent?>(null, file) {
         value = withContext(Dispatchers.IO) { loadText(file, prettyJson) }
     }
@@ -99,30 +103,49 @@ fun TextViewer(file: File, prettyJson: Boolean, search: SearchState? = null) {
         c == null -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
-        c.isSmall -> SelectableTextViewer(c, search)
+        c.isSmall -> SelectableTextViewer(
+            c,
+            search,
+            hScroll = tab.scrollStateOf("text-h:${file.path}"),
+            vScroll = tab.scrollStateOf("text-v:${file.path}"),
+        )
         else -> LargeTextViewer(
             lines = c.lines,
             banner = if (c.truncated) "⚠ 文件超过 ${MAX_TEXT_BYTES / 1024 / 1024} MB，仅显示前一部分" else null,
             search = search,
+            listState = tab.listStateOf("text:${file.path}"),
+            hScroll = tab.scrollStateOf("text-lh:${file.path}"),
         )
     }
 }
 
 /** 小文件：只读 BasicTextField（可聚焦，内置 Cmd+A 全选 / Cmd+C 复制 / 键盘选择）+ 行号列 */
 @Composable
-private fun SelectableTextViewer(c: TextContent, search: SearchState?) {
+private fun SelectableTextViewer(c: TextContent, search: SearchState?, hScroll: ScrollState, vScroll: ScrollState) {
     // 搜索条关闭（Esc）后不再高亮，但保留搜索词，重开时输入框还在
     val query = if (search?.visible == true) search.query else ""
-    val hScroll = rememberScrollState()
-    val vScroll = rememberScrollState()
     var fieldValue by remember(c.text) { mutableStateOf(TextFieldValue(c.text)) }
     var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
 
     val matches = remember(c.text, query) { findOffsetMatches(c.text, query) }
-    var currentMatch by remember(matches) { mutableStateOf(0) }
+    var localMatch by remember(matches) { mutableStateOf(0) }
+    val currentMatch = search?.currentMatch ?: localMatch
 
-    // 跳转当前匹配：选中 + 滚动到该处所在行
-    LaunchedEffect(currentMatch, matches) {
+    // 搜索词变化时从第 0 个匹配开始；viewer 重建（切 tab 回来）不重置
+    var lastQuery by remember { mutableStateOf(query) }
+    if (query != lastQuery) {
+        lastQuery = query
+        if (search != null) search.currentMatch = 0 else localMatch = 0
+    }
+
+    fun moveMatch(delta: Int) {
+        if (matches.isEmpty()) return
+        val next = (currentMatch + delta + matches.size) % matches.size
+        if (search != null) search.currentMatch = next else localMatch = next
+    }
+
+    // 跳转当前匹配：选中 + 滚动到该处所在行（仅在查询词/序号变化时执行，不因 viewer 重建触发）
+    LaunchedEffect(query, currentMatch) {
         val m = matches.getOrNull(currentMatch) ?: return@LaunchedEffect
         fieldValue = fieldValue.copy(selection = TextRange(m.first, m.last + 1))
         layout?.let { l ->
@@ -137,8 +160,8 @@ private fun SelectableTextViewer(c: TextContent, search: SearchState?) {
                 SearchBar(
                     state = search,
                     resultText = if (query.isEmpty()) null else "${currentMatch + 1}/${matches.size}",
-                    onPrevious = if (matches.isEmpty()) null else ({ currentMatch = (currentMatch - 1 + matches.size) % matches.size }),
-                    onNext = if (matches.isEmpty()) null else ({ currentMatch = (currentMatch + 1) % matches.size }),
+                    onPrevious = if (matches.isEmpty()) null else ({ moveMatch(-1) }),
+                    onNext = if (matches.isEmpty()) null else ({ moveMatch(1) }),
                 )
             }
             Row(Modifier.fillMaxSize()) {
@@ -193,19 +216,39 @@ private fun SelectableTextViewer(c: TextContent, search: SearchState?) {
     }
 }
 
-/** 大文本虚拟滚动渲染：不折行 + 行内可选择 + 双向滚动条 + 搜索高亮跳转；供文本/abc 反汇编共用 */
+/** 大文本虚拟滚动渲染：不折行 + 行内可选择 + 双向滚动条 + 搜索高亮跳转；供文本/abc 反汇编共用。
+ *  listState/hScroll 由调用方提供（tab 会话缓存），默认 remember 便于独立使用。 */
 @Composable
-internal fun LargeTextViewer(lines: List<String>, banner: String? = null, search: SearchState? = null) {
+internal fun LargeTextViewer(
+    lines: List<String>,
+    banner: String? = null,
+    search: SearchState? = null,
+    listState: LazyListState = rememberLazyListState(),
+    hScroll: ScrollState = rememberScrollState(),
+) {
     // 搜索条关闭（Esc）后不再高亮，但保留搜索词，重开时输入框还在
     val query = if (search?.visible == true) search.query else ""
-    val hScroll = rememberScrollState()
-    val listState = rememberLazyListState()
 
     val matches = remember(lines, query) { findLineMatches(lines, query) }
     val matchByLine = remember(matches) { matches.groupBy { it.line } }
-    var currentMatch by remember(matches) { mutableStateOf(0) }
+    var localMatch by remember(matches) { mutableStateOf(0) }
+    val currentMatch = search?.currentMatch ?: localMatch
 
-    LaunchedEffect(currentMatch, matches) {
+    // 搜索词变化时从第 0 个匹配开始；viewer 重建（切 tab 回来）不重置
+    var lastQuery by remember { mutableStateOf(query) }
+    if (query != lastQuery) {
+        lastQuery = query
+        if (search != null) search.currentMatch = 0 else localMatch = 0
+    }
+
+    fun moveMatch(delta: Int) {
+        if (matches.isEmpty()) return
+        val next = (currentMatch + delta + matches.size) % matches.size
+        if (search != null) search.currentMatch = next else localMatch = next
+    }
+
+    // 仅在查询词/序号变化时跳转滚动；viewer 重建（切 tab 回来）key 不变，滚动位置得以保留
+    LaunchedEffect(query, currentMatch) {
         if (matches.isNotEmpty()) {
             listState.scrollToItem(matches[currentMatch.coerceIn(matches.indices)].line)
         }
@@ -217,8 +260,8 @@ internal fun LargeTextViewer(lines: List<String>, banner: String? = null, search
                 SearchBar(
                     state = search,
                     resultText = if (query.isEmpty()) null else "${currentMatch + 1}/${matches.size}",
-                    onPrevious = if (matches.isEmpty()) null else ({ currentMatch = (currentMatch - 1 + matches.size) % matches.size }),
-                    onNext = if (matches.isEmpty()) null else ({ currentMatch = (currentMatch + 1) % matches.size }),
+                    onPrevious = if (matches.isEmpty()) null else ({ moveMatch(-1) }),
+                    onNext = if (matches.isEmpty()) null else ({ moveMatch(1) }),
                 )
             }
             Box(Modifier.fillMaxSize()) {
