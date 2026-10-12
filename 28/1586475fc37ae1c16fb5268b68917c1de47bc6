@@ -1,0 +1,36 @@
+README.md
+  s_cad527f54ef54d::t_2a2bbe7d16b697 3,5-7,12-28,42-45,48-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.2",
+  "base_commit_sha": "281586475fc37ae1c16fb5268b68917c1de47bc6",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  },
+  "sessions": {
+    "s_cad527f54ef54d": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_a15bd79f-2607-41d0-af1b-2f3d6c030439",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_additions": 27,
+      "total_deletions": 14,
+      "overridden_lines": 0,
+      "turn_models": {
+        "t_2a2bbe7d16b697": "GLM-5.3"
+      },
+      "model_totals": {
+        "GLM-5.3": {
+          "additions": 27,
+          "deletions": 14
+        }
+      }
+    }
+  }
+}
