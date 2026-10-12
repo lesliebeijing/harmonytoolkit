@@ -1,0 +1,47 @@
+desktopApp/src/main/kotlin/com/lesliefang/harmonytoolkit/ui/TabBar.kt
+  s_cad527f54ef54d::t_175e5f68954f6c 42
+  s_cad527f54ef54d::t_019a366de5b07f 16-22,25,27-30,37,43-73
+  s_cad527f54ef54d::t_a0da0635c2ea56 100-116
+  s_cad527f54ef54d::t_939c1695eaee58 128
+  s_cad527f54ef54d::t_db180f218ff684 98-99,117-118
+  s_cad527f54ef54d::t_f7f0fb8bfab8da 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.2",
+  "base_commit_sha": "732ca370e8d79e93de6a7e32bac7dec852f9777a",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  },
+  "sessions": {
+    "s_cad527f54ef54d": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_a15bd79f-2607-41d0-af1b-2f3d6c030439",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_additions": 78,
+      "total_deletions": 11,
+      "overridden_lines": 0,
+      "turn_models": {
+        "t_019a366de5b07f": "GLM-5.3",
+        "t_0fcb54f10816da": "GLM-5.3",
+        "t_175e5f68954f6c": "GLM-5.3",
+        "t_939c1695eaee58": "GLM-5.3",
+        "t_a0da0635c2ea56": "GLM-5.3",
+        "t_db180f218ff684": "GLM-5.3",
+        "t_f7f0fb8bfab8da": "GLM-5.3"
+      },
+      "model_totals": {
+        "GLM-5.3": {
+          "additions": 78,
+          "deletions": 11
+        }
+      }
+    }
+  }
+}
