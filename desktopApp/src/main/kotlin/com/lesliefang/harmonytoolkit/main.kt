@@ -28,6 +28,7 @@ import androidx.compose.ui.draganddrop.DragData
 import androidx.compose.ui.draganddrop.dragData
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
@@ -54,8 +55,10 @@ fun main() = application {
         title = "鸿蒙开发助手",
         state = rememberWindowState(size = DpSize(1360.dp, 860.dp)),
         onKeyEvent = { event ->
-            // Cmd+F 打开当前 tab 内容区的搜索条
-            if (event.type == KeyEventType.KeyDown && event.key == Key.F && event.isMetaPressed) {
+            // Cmd+F / Ctrl+F 打开当前 tab 内容区的搜索条
+            if (event.type == KeyEventType.KeyDown && event.key == Key.F &&
+                (event.isMetaPressed || event.isCtrlPressed)
+            ) {
                 state.activeTab?.search?.visible = true
                 true
             } else {
