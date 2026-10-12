@@ -1,0 +1,38 @@
+.github/workflows/release.yml
+  s_cad527f54ef54d::t_e2f7429ff7273e 57-58
+  s_cad527f54ef54d::t_19273f1f187806 8-11,19-21,24,27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.2",
+  "base_commit_sha": "bf75f328752eaae6a76e6beef42eb4f5debf18a4",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  },
+  "sessions": {
+    "s_cad527f54ef54d": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_a15bd79f-2607-41d0-af1b-2f3d6c030439",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_additions": 11,
+      "total_deletions": 4,
+      "overridden_lines": 0,
+      "turn_models": {
+        "t_19273f1f187806": "GLM-5.3",
+        "t_e2f7429ff7273e": "GLM-5.3"
+      },
+      "model_totals": {
+        "GLM-5.3": {
+          "additions": 11,
+          "deletions": 4
+        }
+      }
+    }
+  }
+}
