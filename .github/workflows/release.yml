@@ -19,12 +19,21 @@ jobs:
           # macos-latest = Apple Silicon，只出 arm64 dmg；
           # 用默认构建类型 packageDmg/packageMsi，不经 ProGuard（签名工具反射调用，不混淆）。
           # 产物路径用 ** 通配，兼容 compose 各版本产物目录结构差异（1.12 在 main/dmg/，老版本在 main/app/dmg/）
+          #
+          # uber jar（packageUberJarForCurrentOS）与安装包同 runner 构建、多出一类产物：
+          # Compose/Skia 原生库按构建机 OS 打包，所以 mac/windows 必须各构建一份；
+          # jar 产物在 build/compose/jars/，文件名形如 com.lesliefang.harmonytoolkit-<os>-<arch>-<版本>.jar，
+          # 目标机器装 JDK 21+ 即可 java -jar 启动
           - os: macos-latest
             task: packageDmg
-            files: desktopApp/build/compose/binaries/main/**/*.dmg
+            files: |
+              desktopApp/build/compose/binaries/main/**/*.dmg
+              desktopApp/build/compose/jars/*.jar
           - os: windows-latest
             task: packageMsi
-            files: desktopApp/build/compose/binaries/main/**/*.msi
+            files: |
+              desktopApp/build/compose/binaries/main/**/*.msi
+              desktopApp/build/compose/jars/*.jar
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -46,8 +55,8 @@ jobs:
           [[ "$v" =~ ^[1-9][0-9]*(\.[0-9]+){0,2}$ ]] || v="1.0.0"
           echo "version=$v" >> "$GITHUB_OUTPUT"
 
-      - name: 打包
-        run: ./gradlew :desktopApp:${{ matrix.task }} -PpackageVersion=${{ steps.ver.outputs.version }}
+      - name: 打包（安装包 + uber jar）
+        run: ./gradlew :desktopApp:${{ matrix.task }} :desktopApp:packageUberJarForCurrentOS -PpackageVersion=${{ steps.ver.outputs.version }}
 
       - name: 上传构建产物（workflow_dispatch 调试用）
         uses: actions/upload-artifact@v4
