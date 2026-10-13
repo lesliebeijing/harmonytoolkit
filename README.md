@@ -25,13 +25,30 @@ Kotlin Multiplatform + Compose Desktop 实现的鸿蒙安装包查看/操作工�
 
 ### 分发
 
-- GitHub Actions 打 tag（`v*`）触发双平台打包发布：macOS dmg（Apple Silicon）+ Windows msi
+- GitHub Actions 打 tag（`v*`）触发双平台打包发布：macOS dmg（Apple Silicon）+ Windows msi + 双平台 uber jar（见下节）
 
 ## 运行
+
+需 JDK 21+（产物按 Java 21 字节码编译，CI 也用 JDK 21 构建）。
 
 ```bash
 ./gradlew :desktopApp:run
 ```
+
+## uber jar
+
+单文件可执行 jar，内置全部依赖与当前平台的 Compose/Skia 原生库；目标机器装好 JDK 21+ 即可 `java -jar` 启动，免安装。文件名形如 `com.lesliefang.harmonytoolkit-<平台>-<架构>-<版本>.jar`。
+
+```bash
+# 构建（原生库跟随构建机平台：mac 出 macos-arm64，windows 出 windows-x86_64）
+./gradlew :desktopApp:packageUberJarForCurrentOS -PpackageVersion=1.0.0
+
+# 使用
+java -jar desktopApp/build/compose/jars/com.lesliefang.harmonytoolkit-macos-arm64-1.0.0.jar
+```
+
+- 不走 ProGuard 混淆版任务（`packageReleaseUberJarForCurrentOS`）：签名工具依赖反射调用，混淆后会挂
+- 要出 Windows 版 uber jar 需在 Windows 上构建；Release CI 已在 mac/windows 两个 runner 各构建一份并附到 GitHub Release
 
 ## 工程结构
 
