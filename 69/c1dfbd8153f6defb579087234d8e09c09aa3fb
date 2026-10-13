@@ -1,0 +1,43 @@
+.github/workflows/release.yml
+  s_cee30dd7ddea25::t_1ee49065d0247e 58-59
+  s_cee30dd7ddea25::t_72b1b6e7cf418e 25
+  s_cee30dd7ddea25::t_bf49c59c18ccdc 22-24,26,29-31,34-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.2",
+  "base_commit_sha": "69c1dfbd8153f6defb579087234d8e09c09aa3fb",
+  "prompts": {},
+  "humans": {
+    "h_b6170ff743a2db": {
+      "author": "fanglin <fl_beijing@126.com>"
+    }
+  },
+  "sessions": {
+    "s_cee30dd7ddea25": {
+      "agent_id": {
+        "tool": "zcode",
+        "id": "sess_bdc03ca7-6732-4541-94f4-e74db6f7e0bd",
+        "model": "GLM-5.3"
+      },
+      "human_author": "fanglin <fl_beijing@126.com>",
+      "total_additions": 63,
+      "total_deletions": 6,
+      "overridden_lines": 0,
+      "turn_models": {
+        "t_1ee49065d0247e": "GLM-5.3",
+        "t_526d530984ac87": "GLM-5.3",
+        "t_72b1b6e7cf418e": "GLM-5.3",
+        "t_83b59c035ce429": "GLM-5.3",
+        "t_99f51e97a939ba": "GLM-5.3",
+        "t_bf49c59c18ccdc": "GLM-5.3"
+      },
+      "model_totals": {
+        "GLM-5.3": {
+          "additions": 63,
+          "deletions": 6
+        }
+      }
+    }
+  }
+}
